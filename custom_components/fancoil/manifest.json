@@ -1,0 +1,14 @@
+{
+  "domain": "fancoil",
+  "name": "FanCoil.co.uk",
+  "codeowners": ["@mrsimonbennett"],
+  "config_flow": true,
+  "dhcp": [{ "hostname": "fancoil-*" }],
+  "documentation": "https://github.com/Warm-Energy/fancoil_home_assistant",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/Warm-Energy/fancoil_home_assistant/issues",
+  "requirements": [],
+  "version": "1.0.0",
+  "zeroconf": ["_fancoil._tcp.local."]
+}

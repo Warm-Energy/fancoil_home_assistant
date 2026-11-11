@@ -1,0 +1,42 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "FanCoil.co.uk",
+        "description": "Enter the IP address or hostname of the thermostat on your network.",
+        "data": {
+          "host": "Host"
+        }
+      },
+      "zeroconf_confirm": {
+        "title": "FanCoil.co.uk",
+        "description": "Set up the FanCoil.co.uk thermostat discovered at {host}?"
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach the thermostat. Check the IP and that it is on the network."
+    },
+    "abort": {
+      "already_configured": "This thermostat is already configured.",
+      "cannot_connect": "Could not reach the thermostat."
+    }
+  },
+  "entity": {
+    "lock": {
+      "child_lock": {
+        "name": "Child lock"
+      }
+    },
+    "sensor": {
+      "room_temperature": {
+        "name": "Room temperature"
+      }
+    },
+    "update": {
+      "firmware": {
+        "name": "Firmware"
+      }
+    }
+  }
+}
