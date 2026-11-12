@@ -1,8 +1,7 @@
 # FanCoil.co.uk — Home Assistant integration
 
-Local control for the **FanCoil.co.uk** fan-coil thermostat running the custom
-firmware in this repo. Talks to the firmware's local REST API
-(`GET /state`, `POST /set`) — no cloud, no account.
+Local control for the **FanCoil.co.uk** fan-coil thermostat. Talks to the thermostat's
+local REST API (`GET /state`, `POST /set`) — no cloud, no account.
 
 ## What you get
 
@@ -13,6 +12,8 @@ A single device with:
   action (heating / cooling / fan / idle).
 - **Child-lock** lock entity — the panel keypad lock.
 - **Room-temperature sensor** — the measured room temp, for history/automations.
+- **Fan-speed sensor** — the running speed (1–7), blank in *auto* (the panel never
+  reports the speed it picks internally; the fan *mode* is on the climate entity).
 - **Firmware update entity** — installed vs latest, one-click install (see below).
 
 Polls `/state` every 10 s; commands reflect **instantly** (optimistic) and are then
@@ -109,5 +110,5 @@ reflash. Rollback makes that safe: a bad image reverts on the next boot.
   the MCU hasn't yet produced a valid status frame (`"valid": false`); the firmware
   update entity stays available (its data is ESP-side).
 
-See [`../../firmware/`](../../firmware/) for the firmware and
-[`../../re/MCU_PROTOCOL.md`](../../re/MCU_PROTOCOL.md) for the wire protocol.
+The companion open firmware for the thermostat lives at
+[Warm-Energy/fancoil_thermostat](https://github.com/Warm-Energy/fancoil_thermostat).

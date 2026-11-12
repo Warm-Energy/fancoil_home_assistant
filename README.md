@@ -13,6 +13,8 @@ A single device, auto-discovered on your network:
   current room temperature, and the live action (heating / cooling / fan / idle).
 - **Child-lock** — the panel keypad lock, as a lock entity.
 - **Room-temperature sensor** — for history and automations.
+- **Fan-speed sensor** — the running speed (1–7) for history and automations; blank in
+  *auto*, because the panel never reports the speed it picks internally.
 - **Firmware update** — reports the installed version and offers one-click updates.
 
 Commands reflect **instantly** in the UI (optimistic), then confirm on the next poll.

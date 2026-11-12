@@ -31,6 +31,9 @@
     "sensor": {
       "room_temperature": {
         "name": "Room temperature"
+      },
+      "fan_speed": {
+        "name": "Fan speed"
       }
     },
     "update": {
