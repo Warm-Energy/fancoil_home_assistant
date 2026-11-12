@@ -45,12 +45,18 @@ class FancoilRoomTemp(FancoilEntity, SensorEntity):
 
 
 class FancoilFanSpeed(FancoilEntity, SensorEntity):
-    """The fan's current fixed speed, 1–7.
+    """The fan's current running speed, 1–7 (0 when the unit is off).
 
-    The panel only reports the fan *setting* — a fixed speed 1–7, or "auto". In auto the
-    MCU chooses and drives a speed itself but never reports which one over the UART link,
-    so there is no real running speed to show: the sensor is `unknown` (blank) while in
-    auto. The fan *mode* (auto / 1–7) is available on the climate entity.
+    The panel only reports the fan *setting* — a fixed speed 1–7, or "auto" — and it keeps
+    reporting that setting even when powered off. So this sensor maps it to what the fan is
+    actually doing:
+
+    - powered off -> 0 (the fan isn't running, whatever the retained setting says);
+    - on + a fixed speed -> that speed, 1–7;
+    - on + auto -> `unknown` (blank): the MCU picks and drives a speed itself but never
+      reports which one over the UART link, so there is no real running speed to show.
+
+    The fan *mode* (auto / 1–7) is available on the climate entity.
     """
 
     _attr_translation_key = "fan_speed"
@@ -64,9 +70,13 @@ class FancoilFanSpeed(FancoilEntity, SensorEntity):
 
     @property
     def native_value(self) -> int | None:
+        # Powered off: the fan isn't running, though the panel still reports its last set
+        # speed — report 0, not the stale level.
+        if not self.data.get("power"):
+            return 0
         fan = self.data.get("fan")
-        # 0 == "auto": the MCU doesn't report the speed it runs in auto, so show nothing
-        # rather than a misleading 0 (which would read as "fan off").
-        if not fan:  # None or 0
+        # On + 0 == "auto": the MCU doesn't report the speed it runs, so leave it blank
+        # rather than show a misleading 0 (which would read as "fan off").
+        if not fan:
             return None
         return int(fan)

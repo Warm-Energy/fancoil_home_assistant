@@ -12,8 +12,8 @@ A single device with:
   action (heating / cooling / fan / idle).
 - **Child-lock** lock entity — the panel keypad lock.
 - **Room-temperature sensor** — the measured room temp, for history/automations.
-- **Fan-speed sensor** — the running speed (1–7), blank in *auto* (the panel never
-  reports the speed it picks internally; the fan *mode* is on the climate entity).
+- **Fan-speed sensor** — the running speed (1–7); `0` when off, blank in *auto* (the panel
+  never reports the speed it picks internally; the fan *mode* is on the climate entity).
 - **Firmware update entity** — installed vs latest, one-click install (see below).
 
 Polls `/state` every 10 s; commands reflect **instantly** (optimistic) and are then
